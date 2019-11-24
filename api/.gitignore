@@ -1,0 +1,12 @@
+## Ignore build output and debug/test artefacts
+
+# Build results
+[Bb]in/
+[Pp]kg/
+*.exe
+*.a
+*.zip
+main
+
+# Debug artefacts
+debug
