@@ -1,25 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import './App.css';
 
+
 function App() {
+  const [modalShow, setModalShow] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ButtonToolbar className="App-header">
+      <ButtonGroup vertical>
+        <Button variant="primary" onClick={() => setModalShow(true)}>
+          Book Holiday
+      </Button>
+      </ButtonGroup>
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </ButtonToolbar>
+  );
+}
+
+interface IProps {
+  onHide: () => void,
+  show: boolean
+}
+
+function MyVerticallyCenteredModal(props: IProps) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Book Holiday
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="form-group row">
+          <label>
+            Start Date:
+            <input className="form-control" type="date" name="startDate" />
+            <select className="form-control">
+              <option>am</option>
+              <option>pm</option>
+            </select>
+          </label>
+        </div>
+        <div className="form-group">
+          <label>
+            End Date:
+            <input className="form-control" type="date" name="endDate" />
+          </label>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 
