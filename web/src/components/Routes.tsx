@@ -14,8 +14,8 @@ const Routes = (
         <Container fluid>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/calendar" component={Calendar} />
-                <Route exact path="/documents" component={Documents} />
+                <Route path="/calendar" component={Calendar} />
+                <Route path="/documents" component={Documents} />
                 <Route component={NotFound} />
             </Switch>
         </Container>

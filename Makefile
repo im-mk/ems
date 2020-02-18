@@ -9,3 +9,7 @@ stop-db:
 .PHONY: start-api
 start-api: 
 	cd api && make start
+
+.PHONY: upload-web
+upload-web:
+	cd web && make upload
