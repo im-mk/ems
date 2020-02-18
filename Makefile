@@ -1,14 +1,11 @@
-.PHONY: start clean start-db
 
-clean:
-	terraform destroy
-
-start:
-	terraform init
-	terraform apply
-
+.PHONY: start-db
 start-db:
 	docker-compose up -d --build
 
 stop-db:
 	docker-compose down -v
+
+.PHONY: start-api
+start-api: 
+	cd api && make start
