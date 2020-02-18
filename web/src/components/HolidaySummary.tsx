@@ -4,9 +4,9 @@ import Table from 'react-bootstrap/Table';
 function HolidaySummary() {
     return (
         <div>
-            <h4>Holiday Summary</h4>
+            <h5>Holiday Summary</h5>
             <div>
-                <Table striped hover>
+                <Table striped hover responsive>
                     <thead>
                         <tr>
                             <th></th>
