@@ -19,8 +19,9 @@ function HolidaySummary(props: IProps) {
                         <tr>
                             <th></th>
                             <th>Date</th>
-                            <th>Comments</th>
+                            <th>Date Requested</th>
                             <th>Approved By</th>
+                            <th>Date Approved</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +39,9 @@ function RenderRow(holiday: IHoliday, index: number) {
         <tr>
             <td>{index + 1}</td>
             <td>{holiday.Date}</td>
-            <td>nothing</td>
+            <td>{holiday.DateRequested}</td>
             <td>{holiday.ApprovedBy}</td>
+            <td>{holiday.DateApproved}</td>
         </tr>
     )
 }

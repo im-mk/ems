@@ -32,11 +32,14 @@ namespace EMS.Api.Controllers
         public HolidaySummary GetSummary(int userId)
         {
             return new HolidaySummary(
-
                 yearHolidays: new[]
                 {
                     new YearHoliday(
                         year: 2019,
+                        total: 22
+                    ),
+                    new YearHoliday(
+                        year: 2020,
                         total: 25
                     )
                 },
@@ -49,9 +52,17 @@ namespace EMS.Api.Controllers
                 holidays: new[]
                 {
                     new Holiday(
+                        dateRequested: DateTime.Today.AddDays(-10).ToShortDateString(),
                         holidayOn: DateTime.Today.ToShortDateString(),
                         datePart: DatePartEnum.FullDay.Description(),
-                        approvedBy: "Aamir Abbas")
+                        approvedBy: "Aamir Abbas",
+                        dateApproved: DateTime.Today.AddDays(-5).ToShortDateString()),
+                    new Holiday(
+                        dateRequested: DateTime.Today.AddDays(-30).ToShortDateString(),
+                        holidayOn: DateTime.Today.AddDays(-20).ToShortDateString(),
+                        datePart: DatePartEnum.FullDay.Description(),
+                        approvedBy: "John Major",
+                        dateApproved: DateTime.Today.AddDays(-25).ToShortDateString())
                 }
             );
         }

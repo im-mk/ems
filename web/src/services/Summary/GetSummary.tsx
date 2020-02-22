@@ -20,7 +20,12 @@ function ProcessResponse(data: ISummaryResponse): ISummary {
   const holidays: IHoliday[] = [];
 
   for (const holiday of data.holidays) {
-    const h: IHoliday = { ApprovedBy: holiday.approvedBy, Date: holiday.holidayOn + ' ' + holiday.datePart }
+    const h: IHoliday = {
+      ApprovedBy: holiday.approvedBy,
+      Date: holiday.holidayOn + ' ' + holiday.datePart,
+      DateRequested: holiday.dateRequested,
+      DateApproved: holiday.dateApproved
+    }
     holidays.push(h);
   }
 

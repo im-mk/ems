@@ -1,4 +1,6 @@
 export default interface IHoliday {
     Date: string,
-    ApprovedBy: string
+    DateRequested: string,
+    ApprovedBy: string,
+    DateApproved: string
 }
