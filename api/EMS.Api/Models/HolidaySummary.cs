@@ -4,17 +4,15 @@ namespace EMS.Api.Models
 {
     public class HolidaySummary
     {
-        public HolidaySummary(int year, int total, IEnumerable<Holiday> holidays, UserBasic user)
+        public HolidaySummary(IEnumerable<YearHoliday> yearHolidays, IEnumerable<Holiday> holidays, UserBasic user)
         {
-            Year = year;
-            Total = total;
+            YearHolidays = yearHolidays;
             Holidays = holidays;
             User = user;
         }
 
         public UserBasic User { get; private set; }
-        public int Year { get; set; }
-        public int Total { get; private set; }
+        public IEnumerable<YearHoliday> YearHolidays { get; private set; }
         public IEnumerable<Holiday> Holidays { get; private set; }
     }
 }

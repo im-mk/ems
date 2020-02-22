@@ -4,15 +4,15 @@ namespace EMS.Api.Models
 {
     public class Holiday
     {
-        public Holiday(DateTime holidayOn, DatePartEnum datePart, UserShort approvedBy)
+        public Holiday(string holidayOn, string datePart, string approvedBy)
         {
             HolidayOn = holidayOn;
             DatePart = datePart;
             ApprovedBy = approvedBy;
         }
 
-        public DateTime HolidayOn { get; private set; }
-        public DatePartEnum DatePart { get; private set; }
-        public UserShort ApprovedBy { get; private set; }
+        public string HolidayOn { get; private set; }
+        public string DatePart { get; private set; }
+        public string ApprovedBy { get; private set; }
     }
 }

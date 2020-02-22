@@ -15,13 +15,10 @@ Required software
 Windows
 
 choco: https://chocolatey.org/
-gnu make: choco install make
-terraform: choco install terraform
-golang: choco install golang
+make: choco install make
 node: choco install nodejs
+dotnet core: choco install dotnetcore-sdk
 awscli: choco install awscli
-
-Set gopath for lambdas to build: https://github.com/golang/go/wiki/SettingGOPATH
 
 ### UI
 
