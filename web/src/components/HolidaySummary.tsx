@@ -1,17 +1,20 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import ISummary from '../types/ISummary';
+import IHoliday from '../types/IHoliday';
 
 interface IProps {
     Summary: ISummary
 }
 
 function HolidaySummary(props: IProps) {
+    const holidays = props.Summary.Holidays;
+
     return (
         <div>
             <h5>Holiday Summary</h5>
             <div>
-                <Table striped hover responsive>
+                <Table hover responsive>
                     <thead>
                         <tr>
                             <th></th>
@@ -21,18 +24,24 @@ function HolidaySummary(props: IProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>25/01/2012</td>
-                            <td>Comments</td>
-                            <td>Otto</td>
-                        </tr>
+                        {holidays.map((holiday, index) => RenderRow(holiday, index))}
                     </tbody>
                 </Table>
 
             </div>
         </div>
     );
+}
+
+function RenderRow(holiday: IHoliday, index: number) {
+    return (
+        <tr>
+            <td>{index + 1}</td>
+            <td>{holiday.Date}</td>
+            <td>nothing</td>
+            <td>{holiday.ApprovedBy}</td>
+        </tr>
+    )
 }
 
 export default HolidaySummary;
