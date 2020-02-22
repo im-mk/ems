@@ -1,7 +1,12 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import ISummary from '../types/ISummary';
 
-function HolidaySummary() {
+interface IProps {
+    Summary: ISummary
+}
+
+function HolidaySummary(props: IProps) {
     return (
         <div>
             <h5>Holiday Summary</h5>
@@ -21,12 +26,6 @@ function HolidaySummary() {
                             <td>25/01/2012</td>
                             <td>Comments</td>
                             <td>Otto</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>25/01/2012</td>
-                            <td>Comments</td>
-                            <td>Thornton</td>
                         </tr>
                     </tbody>
                 </Table>
