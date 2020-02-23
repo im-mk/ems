@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Routes from './components/Routes';
-import Menu from './components/Menu';
+import Routes from '../Routes';
+import Menu from '../Menu';
 import Container from 'react-bootstrap/Container';
 
 function App() {
