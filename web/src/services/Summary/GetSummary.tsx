@@ -1,12 +1,12 @@
 import Axios from "axios";
-import { getApiUrl } from "../url";
+import { GetApiUrl } from "../../env";
 import ISummaryResponse from './types/ISummaryResponse';
 import IHoliday from "../../types/IHoliday";
 import ISummary from "../../types/ISummary";
 
 export async function GetSummary(userId: number): Promise<ISummary> {
 
-  const getRecordsUrl = getApiUrl() + "/holidays?UserId=" + userId;
+  const getRecordsUrl = GetApiUrl() + "/holidays?UserId=" + userId;
 
   return await Axios.get<ISummaryResponse>(getRecordsUrl)
     .then(response => {
