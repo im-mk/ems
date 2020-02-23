@@ -2,10 +2,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Routes from './components/Routes';
+import React from 'react';
+import App from './App';
 
 ReactDOM.render(
-    Routes,
+    <App />,
     document.getElementById('root')
 );
 

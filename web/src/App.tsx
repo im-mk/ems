@@ -1,17 +1,15 @@
 import React from 'react';
-import Calendar from './components/Calendar';
+import './App.css';
+import Routes from './components/Routes';
 import Menu from './components/Menu';
 import Container from 'react-bootstrap/Container';
-import './App.css';
 
 function App() {
   return (
     <div >
-      <div className="App-header">
-        <Menu />
-      </div>
+      <Menu />
       <Container fluid>
-        <Calendar />
+        <Routes />
       </Container>
     </div>
   );
