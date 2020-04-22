@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace EMS.Api.Models
+namespace EMS.Domain
 {
     public enum DatePartEnum
     {

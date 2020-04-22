@@ -1,6 +1,4 @@
-using EMS.Api.Models;
-
-namespace EMS.Api.Models
+namespace EMS.Domain
 {
     public class UserShort
     {

@@ -1,21 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using EMS.Db;
+using Microsoft.EntityFrameworkCore;
+using MediatR;
+using EMS.Core.Holidays;
 
 namespace EMS.Api
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private const string _corsPolicy = "CorsPolicy";
 
         public Startup(IConfiguration configuration)
         {
@@ -27,15 +24,23 @@ namespace EMS.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
+            services.AddDbContext<DataContext>(opt =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:3000");
-                });
+                opt.UseSqlite(Configuration.GetConnectionString("EMS"));
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(_corsPolicy, policyBuilder =>
+                {
+                    policyBuilder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:3000");
+                });
+            });
+            
+            services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddControllers();
         }
 
@@ -47,7 +52,7 @@ namespace EMS.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(_corsPolicy);
 
             app.UseHttpsRedirection();
 

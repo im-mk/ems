@@ -1,6 +1,6 @@
 using System;
 
-namespace EMS.Api.Models
+namespace EMS.Domain
 {
     public class HolidayRequest
     {
