@@ -54,7 +54,7 @@ namespace EMS.Api
 
             app.UseCors(_corsPolicy);
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

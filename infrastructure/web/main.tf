@@ -3,7 +3,7 @@ provider "aws" {
     profile     =   "${var.profile}"
 }
 
-resource "aws_s3_bucket" "bucket" {
+resource "aws_s3_bucket" "s3_web" {
     bucket = "${var.bucket_name}"
     acl = "public-read"
 
