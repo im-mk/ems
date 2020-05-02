@@ -1,6 +1,6 @@
 provider "aws" {
-    region = "${var.region}"
-    profile = "${var.profile}"
+    region = var.region
+    profile = var.profile
 }
 
 resource "aws_vpc" "vpc_ems" {
@@ -110,14 +110,14 @@ resource "aws_security_group" "sg_ems_api" {
 resource "aws_eip" "eip_ems" {
     instance = aws_instance.ec2_ems_api.id
     vpc = true
-    depends_on = ["aws_internet_gateway.ig_ecs_api"]
+    depends_on = [aws_internet_gateway.ig_ecs_api]
 }
 
 resource "aws_instance" "ec2_ems_api" {
-    ami = "${var.amazon_linux_ami}"
+    ami = var.amazon_linux_ami
     availability_zone = "eu-west-2a"
     instance_type = "t2.micro"
-    key_name = "${var.key}"
+    key_name = var.key
     vpc_security_group_ids = [aws_security_group.sg_ems_api.id]
     subnet_id = aws_subnet.sub_ecs_api.id
     tags = {
