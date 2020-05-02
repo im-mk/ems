@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using EMS.Db;
 using EMS.Domain.Db;
 using MediatR;
+using FluentValidation;
 
 namespace EMS.Core.Holidays
 {
@@ -18,6 +19,17 @@ namespace EMS.Core.Holidays
             public string DatePart { get; set; }
             public string ApprovedBy { get; set; }
             public DateTime? DateApproved { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.RequestedBy).NotEmpty();
+                RuleFor(x => x.DateRequested).NotEmpty();
+                RuleFor(x => x.HolidayOn).NotEmpty();
+                RuleFor(x => x.DatePart).NotEmpty();                
+            }
         }
 
         public class Handler : IRequestHandler<Command>

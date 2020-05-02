@@ -1,7 +1,10 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using EMS.Core.Errors;
 using EMS.Db;
+using FluentValidation;
 using MediatR;
 
 namespace EMS.Core.Holidays
@@ -19,6 +22,17 @@ namespace EMS.Core.Holidays
             public DateTime? DateApproved { get; set; }
         }
 
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.RequestedBy).NotEmpty();
+                RuleFor(x => x.DateRequested).NotEmpty();
+                RuleFor(x => x.HolidayOn).NotEmpty();
+                RuleFor(x => x.DatePart).NotEmpty();                
+            }
+        }
+
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
@@ -31,8 +45,8 @@ namespace EMS.Core.Holidays
             {
                 var holiday = await _context.Holidays.FindAsync(request.Id);
 
-                if (request == null)
-                    throw new Exception("Could not find activity");
+                if (holiday == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { holiday = "Not found" });
 
                 holiday.RequestedBy = request.RequestedBy ?? holiday.RequestedBy;
                 holiday.DateRequested = request.DateRequested.IsDefault() ? holiday.DateRequested : request.DateRequested;

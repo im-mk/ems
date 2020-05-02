@@ -1,3 +1,9 @@
+# Initialize secret-store for local dev
+.PHONY: secret
+secret:
+	dotnet user-secrets init -p EMS.Api/
+	dotnet user-secrets set "TokenKey" "super sectet key" -p EMS.Api/
+
 # Create entity framework migration
 .PHONY: migrate
 migrate: 
@@ -7,6 +13,8 @@ migrate:
 .PHONY: publish
 publish: 
 	dotnet publish --configuration Release
+
+# ##################################################
 
 # Run api on local machine
 .PHONY: start

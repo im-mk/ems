@@ -31,3 +31,9 @@ Start/Stop the api using the following commands.
 `make start-docker`
 
 `make stop-docker`
+
+### Development
+
+We need to store the secret key in dotnet user-secrets store when running the api locally. check dotnet user-secrets utility for more details.
+
+`make secret`

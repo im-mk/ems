@@ -5,62 +5,42 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MediatR;
 using EMS.Core.Holidays;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EMS.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class HolidaysController : ControllerBase
+    public class HolidaysController : BaseController
     {
-        private readonly ILogger<HolidaysController> _logger;
-        private readonly IMediator _mediator;
-
-        public HolidaysController(
-            ILogger<HolidaysController> logger,
-            IMediator mediator)
-        {
-            _mediator = mediator;
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        // [HttpPost]
-        // public bool Post(HolidayRequest request)
-        // {
-        //     if (request.From.Date > request.To.Date)
-        //         return false;
-
-        //     return true;
-        // }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EMS.Domain.Db.Holiday>>> List()
         {
-            return await _mediator.Send(new List.Query());
+            return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<EMS.Domain.Db.Holiday>> Details(int id)
         {
-            return await _mediator.Send(new Details.Query{ Id = id });
+            return await Mediator.Send(new Details.Query{ Id = id });
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Unit>> Edit(int id, Edit.Command command)
         {
             command.Id = id;
-            return await _mediator.Send(command);
+            return await Mediator.Send(command);
         }
 
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
-            return await _mediator.Send(command);
+            return await Mediator.Send(command);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> Delete(int id)
         {
-            return await _mediator.Send(new Delete.Command { Id = id });
+            return await Mediator.Send(new Delete.Command { Id = id });
         }
         // [HttpGet]
         // public async Task<ActionResult<HolidaySummary>> GetSummary(int userId)

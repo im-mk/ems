@@ -1,13 +1,45 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EMS.Domain.Db;
+using Microsoft.AspNetCore.Identity;
 
 namespace EMS.Db
 {
     public static class Seed
     {
-        public static void SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            if(!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser
+                    {
+                        DisplayName = "test",
+                        UserName = "test",
+                        Email = "test@test.com"
+                    },               
+                    new AppUser
+                    {
+                        DisplayName = "bob",
+                        UserName = "bob",
+                        Email = "bob@bob.com"
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "kk",
+                        UserName = "kk",
+                        Email = "kk@kk.com"
+                    }
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
             if(!context.Values.Any())
             {
                 var values = new List<Value>

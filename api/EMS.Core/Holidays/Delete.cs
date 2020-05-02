@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using EMS.Core.Errors;
 using EMS.Db;
 using MediatR;
 
@@ -25,8 +27,8 @@ namespace EMS.Core.Holidays
             {
                 var holiday = await _context.Holidays.FindAsync(request.Id);
 
-                if (request == null)
-                    throw new Exception("Could not find activity");
+                if (holiday == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { holiday = "Not found" });
 
                 _context.Holidays.Remove(holiday);
 
