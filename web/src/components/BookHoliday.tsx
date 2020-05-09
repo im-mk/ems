@@ -43,7 +43,7 @@ function BookHoliday(props: IProps) {
                 <Form.Row>
                     <Form.Label column sm={3}>Comments</Form.Label>
                     <Form.Group>
-                        <Form.Control size="lg" as="textarea" rows="3" name="comments" />
+                        <Form.Control size="lg" as="textarea" rows={3} name="comments" />
                     </Form.Group>
                 </Form.Row>
             </Modal.Body>

@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 class Home extends Component {
     render() {
         return (
-        <div>
-            <button >Logout</button> 
-            <button >Login</button>
-        </div>
+            <div>
+                Home page with calendar summary
+            </div>
         )
     }
 }
