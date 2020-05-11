@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -87,6 +88,29 @@ namespace EMS.Db
                 };
 
                 context.AddRange(holidays);
+            }
+
+            if (!context.Documents.Any())
+            {
+                var documents = new List<Document>
+                {
+                    new Document
+                    {
+                        Id = new Guid("5fbe888b-4ee0-41e7-b619-af477eb4a609"),
+                        Title = "contract1",
+                        Path = "/documents/5fbe888b-4ee0-41e7-b619-af477eb4a609.txt",
+                        DateUploaded = new System.DateTime(2019, 1, 1)
+                    },
+                    new Document
+                    {
+                        Id = new Guid("e25b8fa3-61db-4875-b913-660419e43f42"),
+                        Title = "contract2",
+                        Path = "/documents/e25b8fa3-61db-4875-b913-660419e43f42.txt",
+                        DateUploaded = new System.DateTime(2020, 1, 1)
+                    }
+                };
+
+                context.AddRange(documents);
             }
 
             context.SaveChanges();

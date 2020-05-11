@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Holidays from '../Holidays';
-import Documents from '../Documents';
+import Documents from './../Documents/Documents';
 import Home from '../Home';
 import Menu from '../Menu';
 import Login from '../Login/Login';

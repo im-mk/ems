@@ -18,6 +18,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Amazon.S3;
+using EMS.Core.AWS;
 
 namespace EMS.Api
 {
@@ -86,6 +88,12 @@ namespace EMS.Api
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
+
+            // Inject S3Client with appsettings config
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonS3>();
+            
+            services.AddScoped<IS3Service, S3Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

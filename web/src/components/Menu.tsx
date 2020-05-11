@@ -9,7 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 function Menu() {
     return (
-        <Navbar bg="primary" variant="dark" className="navigation" >
+        <Navbar bg="primary" variant="dark" className="mb-3" >
             <Navbar.Brand href="/">EMS</Navbar.Brand>
             <Nav className="mr-auto">
                 <LinkContainer to="/">

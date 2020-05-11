@@ -83,6 +83,29 @@ namespace EMS.Db.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("EMS.Domain.Db.Document", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateUploaded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Documents");
+                });
+
             modelBuilder.Entity("EMS.Domain.Db.Holiday", b =>
                 {
                     b.Property<int>("Id")

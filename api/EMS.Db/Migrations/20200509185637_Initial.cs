@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EMS.Db.Migrations
 {
-    public partial class AddedIndentity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,65 @@ namespace EMS.Db.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Documents",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Path = table.Column<string>(nullable: true),
+                    Comments = table.Column<string>(nullable: true),
+                    DateUploaded = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Documents", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Holidays",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RequestedBy = table.Column<string>(nullable: true),
+                    DateRequested = table.Column<DateTime>(nullable: false),
+                    HolidayOn = table.Column<DateTime>(nullable: false),
+                    DatePart = table.Column<string>(nullable: true),
+                    ApprovedBy = table.Column<string>(nullable: true),
+                    DateApproved = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Holidays", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Values",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Values", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "YearHolidays",
+                columns: table => new
+                {
+                    Year = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Total = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_YearHolidays", x => x.Year);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,6 +266,18 @@ namespace EMS.Db.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "Holidays");
+
+            migrationBuilder.DropTable(
+                name: "Values");
+
+            migrationBuilder.DropTable(
+                name: "YearHolidays");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

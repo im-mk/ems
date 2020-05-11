@@ -13,6 +13,7 @@ namespace EMS.Db
         public DbSet<Value> Values { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<YearHoliday> YearHolidays { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

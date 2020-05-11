@@ -14,7 +14,6 @@ export const loginSlice = createSlice({
   initialState: initialState,
   reducers: {
     login: (state, action) => {
-      debugger;
       state.token = action.payload;
     },
     logout: state => {

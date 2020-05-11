@@ -35,3 +35,21 @@ start-docker:
 .PHONY: stop-docker
 stop-docker:
 	docker-compose down
+
+#####################################################
+
+# Create s3 bucket and assign a policy
+.PHONY: create-s3
+create-s3:
+	aws --endpoint-url=http://localhost:4572 s3 mb s3://ems-data-bucket
+	aws --endpoint-url=http://localhost:4572 s3api put-bucket-acl --bucket ems-data-bucket --acl public-read 
+
+# Start s3 service locally
+.PHONY: start-s3
+start-s3:
+	docker-compose up -d --build --force-recreate localstack-s3 
+
+# List bucket contents
+.PHONY: list-s3
+list-s3:
+	aws --endpoint-url=http://localhost:4572 s3 ls s3://ems-data-bucket/

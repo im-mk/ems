@@ -18,7 +18,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<EMS.Domain.Db.Holiday>> Details(int id)
         {
             return await Mediator.Send(new Details.Query{ Id = id });
