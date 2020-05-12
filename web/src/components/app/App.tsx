@@ -7,6 +7,8 @@ import Home from '../Home';
 import Menu from '../Menu';
 import Login from '../Login/Login';
 import NotFound from '../NotFound';
+import PrivateRoute from './../PrivateRoutes';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -16,11 +18,12 @@ function App() {
       <Menu />
       <Container fluid>
           <Switch>
-              <Route exact path="/" component={Home} />
+              <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute path="/holidays" component={Holidays} />
+              <PrivateRoute path="/documents" component={Documents} />
+              <PrivateRoute path="/wfh" component={NotFound} />
+              <PrivateRoute path="/tasks" component={NotFound} />
               <Route path="/login" component={Login} />
-              <Route path="/holidays" component={Holidays} />
-              <Route path="/wfh" component={NotFound} />
-              <Route path="/documents" component={Documents} />
               <Route component={NotFound} />
           </Switch>
       </Container>

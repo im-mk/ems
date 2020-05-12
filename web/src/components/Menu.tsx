@@ -29,7 +29,6 @@ function Menu() {
                 </LinkContainer>
             </Nav>
             <DropdownButton id="dropdown-basic-button" title="User">
-                <Dropdown.Item href="/login">Login</Dropdown.Item>
                 <Dropdown.Item href="/logout">Logout</Dropdown.Item>
             </DropdownButton>
         </Navbar>
