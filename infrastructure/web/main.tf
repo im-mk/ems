@@ -1,10 +1,10 @@
 provider "aws" {
-    region      =   "${var.region}"
-    profile     =   "${var.profile}"
+    region = var.region
+    profile = var.profile
 }
 
 resource "aws_s3_bucket" "s3_web" {
-    bucket = "${var.bucket_name}"
+    bucket = var.bucket_name
     acl = "public-read"
 
     cors_rule {

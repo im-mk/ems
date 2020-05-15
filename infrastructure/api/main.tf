@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_ems" {
     cidr_block = "10.1.0.0/16"
     tags = {
         Name = "vpc-ems"
-        App = "${var.app_name}"
+        App = var.app_name
     }
 }
 
@@ -15,7 +15,7 @@ resource "aws_internet_gateway" "ig_ecs_api" {
     vpc_id = aws_vpc.vpc_ems.id
     tags = {
         Name = "ig-ecs-api"
-        App = "${var.app_name}"
+        App = var.app_name
     }
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "sub_ecs_api" {
     availability_zone = "eu-west-2a"
     tags = {
         Name = "sub-ecs-api-a"
-        App = "${var.app_name}"
+        App = var.app_name
     }
 }
 
@@ -103,7 +103,7 @@ resource "aws_security_group" "sg_ems_api" {
 
     tags = {
         Name = "sg_ems_api"
-        App = "${var.app_name}"
+        App = var.app_name
     }
 }
 
@@ -122,6 +122,6 @@ resource "aws_instance" "ec2_ems_api" {
     subnet_id = aws_subnet.sub_ecs_api.id
     tags = {
         Name = "ec2-ems-api"
-        App = "${var.app_name}"
+        App = var.app_name
     }
 }

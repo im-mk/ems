@@ -1,4 +1,22 @@
-# Deploy api
+#Deploy api - s3 data bucket
+.PHONY: init-api
+init-api:
+	cd api/s3 && terraform init
+
+.PHONY: destory-api
+destroy-api:
+	cd api/s3 && terraform destroy
+
+.PHONY: plan-api
+plan-api:
+	cd api/s3 && terraform plan
+
+.PHONY: deploy-api
+deploy-api:
+	cd api/s3 && terraform apply
+
+
+# Deploy api - ec2
 
 .PHONY: init-api
 init-api:
@@ -38,10 +56,10 @@ deploy-web:
 	cd web && terraform apply
 	
 # Local docker deployment
-.PHONY: start-db
-start-db:
-	docker-compose up -d --build
+# .PHONY: start-db
+# start-db:
+# 	docker-compose up -d --build
 
-.PHONY: stop-db
-stop-db:
-	docker-compose down -v
+# .PHONY: stop-db
+# stop-db:
+# 	docker-compose down -v
