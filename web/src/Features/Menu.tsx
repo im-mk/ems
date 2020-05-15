@@ -18,11 +18,11 @@ function Menu() {
                 <LinkContainer to="/holidays">
                     <Button>Holidays</Button>
                 </LinkContainer>
-                <LinkContainer to="/wfh">
-                    <Button>WFH</Button>
-                </LinkContainer>
                 <LinkContainer to="/documents">
                     <Button>Documents</Button>
+                </LinkContainer>
+                <LinkContainer to="/wfh">
+                    <Button>WFH</Button>
                 </LinkContainer>
                 <LinkContainer to="/tasks">
                     <Button>Tasks</Button>

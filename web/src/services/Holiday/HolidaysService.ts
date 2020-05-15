@@ -4,10 +4,10 @@ import IHoliday from "./types/IHoliday";
 
 export async function GetHolidays(token: string): Promise<IHoliday[]> {
 
-  const getRecordsUrl = GetApiUrl() + "/holidays";
+  const url = GetApiUrl() + "/holidays";
  
   const response = await Axios.get<IHoliday[]>(
-    getRecordsUrl,
+    url,
     {
       headers: { Authorization: "Bearer " + token}
     });

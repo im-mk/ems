@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import IHoliday from '../services/Holiday/types/IHoliday';
+import IHoliday from '../../services/Holiday/types/IHoliday';
 
 interface IProps {
     Holidays: IHoliday[]

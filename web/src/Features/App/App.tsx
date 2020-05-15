@@ -1,20 +1,20 @@
-import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import Holidays from '../Holidays';
-import Documents from './../Documents/Documents';
-import Home from '../Home';
+import Holidays from '../Holidays/Holidays';
+import Documents from '../Documents/Documents';
+import Home from '../Home/Home';
 import Menu from '../Menu';
 import Login from '../Login/Login';
 import NotFound from '../NotFound';
-import PrivateRoute from './../PrivateRoutes';
+import PrivateRoute from './PrivateRoutes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Fragment>
       <Menu />
       <Container fluid>
           <Switch>
@@ -27,7 +27,7 @@ function App() {
               <Route component={NotFound} />
           </Switch>
       </Container>
-    </Router>
+    </Fragment>
   );
 }
 

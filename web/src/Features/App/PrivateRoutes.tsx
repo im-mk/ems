@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, RouteProps, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectToken } from '../loginSlice';
+import { SelectToken } from '../Login/Reducer';
 
 export interface IPrivateRouteProps extends RouteProps {
 }
 
 const PrivateRoute: React.FC<IPrivateRouteProps>  = (props) => {
 
-    const token = useSelector(selectToken);
+    const token = useSelector(SelectToken);
     
     var redirectPath = '';
     

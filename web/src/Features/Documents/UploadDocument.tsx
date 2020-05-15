@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useSelector } from 'react-redux';
-import { selectToken } from '../../loginSlice';
-import { Create } from '../../services/Documents/DocumentsService';
+import { useSelector, useDispatch } from 'react-redux';
+import { DocumentsCreateRequest } from './Action';
+import { SelectCreateDocumentResult } from './Reducer';
 
 interface IProps {
     onHide: () => void,
@@ -17,18 +17,20 @@ interface IState {
     comment: string;
 }
 
-function UploadDocument(props: IProps) {
+const UploadDocument: React.FC<IProps> = (props) => {
 
     const [state, setState] = useState<IState>({ selectedFile: null, title: '', comment: ''})
+    const dispatch = useDispatch();
+
+    const result: boolean = useSelector(SelectCreateDocumentResult);
     
-    const token = useSelector(selectToken);
-    
+    if (result)
+    {
+        props.onHide();
+    }
+
     const handleUpload = async () => {
-        var result = await Create(token, state.selectedFile, state.title, state.comment);
-        if (result)
-        {
-            props.onHide();
-        }
+        dispatch(DocumentsCreateRequest({SelectedFile: state.selectedFile, Title: state.title, Comment: state.comment}));
     }
 
     const handleComment = (eve: React.FormEvent) => {

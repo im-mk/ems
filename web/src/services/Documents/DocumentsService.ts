@@ -2,30 +2,31 @@ import Axios from "axios";
 import { GetApiUrl } from "../../env";
 import IDocument from "./types/IDocument";
 import FileDownload from 'js-file-download';
+import { ICreateDocument } from "../../Features/Documents/Types";
 
-export async function Get(token: string): Promise<IDocument[]> {
+export async function Get(token: string, page: number, size: number): Promise<IDocument[]> {
 
-  const getRecordsUrl = GetApiUrl() + "/documents";
+  const url = GetApiUrl() + "/documents?page=" + page + "&size=" + size;
 
   const response = await Axios.get<IDocument[]>(
-    getRecordsUrl,
+    url,
     {
       headers: { Authorization: "Bearer " + token}
     });
   return response.data;
 }
 
-export async function Create(token: string, selectedFile: any, title: string, comment: string): Promise<boolean> {
+export async function Create(token: string, document: ICreateDocument): Promise<boolean> {
 
-  const getRecordsUrl = GetApiUrl() + "/documents";
+  const url = GetApiUrl() + "/documents";
 
   const formData = new FormData();
-  formData.append('file', selectedFile);
-  formData.append('title', title);
-  formData.append('comment', comment);
+  formData.append('file', document.SelectedFile);
+  formData.append('title', document.Title);
+  formData.append('comment', document.Comment);
   
   const response = await Axios.post(
-    getRecordsUrl,
+    url,
     formData,
     {
       headers: { Authorization: "Bearer " + token }
@@ -35,10 +36,10 @@ export async function Create(token: string, selectedFile: any, title: string, co
 
 export async function Link(token: string, id: string): Promise<string> {
 
-  const getRecordsUrl = GetApiUrl() + "/documents/link/"+ id;
+  const url = GetApiUrl() + "/documents/link/"+ id;
   
   const response = await Axios.get<string>(
-    getRecordsUrl,
+    url,
     {
       headers: { Authorization: "Bearer " + token}
     });

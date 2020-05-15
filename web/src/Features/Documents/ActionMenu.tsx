@@ -5,10 +5,11 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import UploadDocument from './UploadDocument';
 import * as Icon from 'react-bootstrap-icons';
 
-function ActionMenu() {
+const ActionMenu: React.FC = () => {
     const [modalShow, setModalShow] = useState(false);
+
     return (
-        <ButtonToolbar className="mb-3">
+        <ButtonToolbar className="mb-3 float-right">
             <ButtonGroup className="mr-2" aria-label="First group">
                 <Button variant="danger" onClick={() => setModalShow(true)}>
                     <Icon.FilePlus /> Add

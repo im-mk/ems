@@ -3,13 +3,20 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import App from './components/app/App';
+import App from './Features/App/App';
 import { Provider } from 'react-redux';
-import store from './store';
+import configureStore from './StoreFile';
+import { ConnectedRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory()
+const store = configureStore(history);
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <ConnectedRouter history={history}>
+            <App />
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );

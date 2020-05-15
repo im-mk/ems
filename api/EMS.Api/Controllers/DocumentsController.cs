@@ -10,13 +10,13 @@ namespace EMS.Api.Controllers
     public class DocumentsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EMS.Domain.Db.Document>>> List()
+        public async Task<ActionResult<IEnumerable<EMS.Domain.Db.Document>>> List([FromQuery]List.Query query)
         {
-            return await Mediator.Send(new List.Query());
+            return await Mediator.Send(query);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Unit>> Create([FromForm] Create.Command command)
+        public async Task<ActionResult<Unit>> Create([FromForm]Create.Command command)
         {
             return await Mediator.Send(command);
         }
