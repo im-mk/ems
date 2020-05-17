@@ -6,8 +6,17 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import './Menu.css';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch } from 'react-redux';
+import { Logout } from './Login/Action';
 
-function Menu() {
+const Menu : React.FC = () => {
+
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(Logout());
+    }
+
     return (
         <Navbar bg="primary" variant="dark" className="mb-3" >
             <Navbar.Brand href="/">EMS</Navbar.Brand>
@@ -29,7 +38,7 @@ function Menu() {
                 </LinkContainer>
             </Nav>
             <DropdownButton id="dropdown-basic-button" title="User">
-                <Dropdown.Item href="/logout">Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleClick}>Logout</Dropdown.Item>
             </DropdownButton>
         </Navbar>
     );

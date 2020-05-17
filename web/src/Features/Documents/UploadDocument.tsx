@@ -29,7 +29,7 @@ const UploadDocument: React.FC<IProps> = (props) => {
         props.onHide();
     }
 
-    const handleUpload = async () => {
+    const handleUpload = () => {
         dispatch(DocumentsCreateRequest({SelectedFile: state.selectedFile, Title: state.title, Comment: state.comment}));
     }
 

@@ -1,31 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import HolidaysList from './HolidaysList';
-import { GetHolidays } from '../../services/Holiday/HolidaysService';
 import IHoliday from '../../services/Holiday/types/IHoliday';
-import { useSelector } from 'react-redux';
-import { SelectToken } from '../Login/Reducer';
+import { useSelector, useDispatch } from 'react-redux';
 import ActionMenu from '../Documents/ActionMenu';
-
-interface IState {
-    Holidays: IHoliday[]
-}
+import { SelectHolidays } from './Reducer';
+import { HolidaysGetRequest } from './Action';
 
 const Holidays: React.FC = () => {
 
-    const [state, setState] = useState<IState>({ Holidays: [] });
-    const token = useSelector(SelectToken);
+    const dispatch = useDispatch();    
+    const holidays:IHoliday[] = useSelector(SelectHolidays);
 
     useEffect(() => {
-        (async () => {
-            const holidays = await GetHolidays(token);
-            setState({ Holidays: holidays })
-        })();
+        dispatch(HolidaysGetRequest());
     }, []);
 
     return (
         <div>
             <ActionMenu />
-            <HolidaysList Holidays={state.Holidays} />
+            <HolidaysList Holidays={holidays} />
         </div>
     );
 }

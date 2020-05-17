@@ -1,15 +1,11 @@
+# start both api and web application in docker container
+.PHONY: start
+start: 
+	cd api && make start-docker
+	cd web && make start-docker
 
-.PHONY: start-db
-start-db:
-	docker-compose up -d --build
-
-stop-db:
-	docker-compose down -v
-
-.PHONY: start-api
-start-api: 
-	cd api && make start
-
-.PHONY: upload-web
-upload-web:
-	cd web && make upload
+.PHONY: stop
+stop: 
+	cd api && make stop-docker
+	cd web && make stop-docker
+	
