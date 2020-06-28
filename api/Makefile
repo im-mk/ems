@@ -6,7 +6,8 @@ secret:
 
 # Create entity framework migration
 .PHONY: migrate
-migrate: 
+migrate:
+	#dotnet ef database drop --force -p EMS.Api/
 	dotnet ef migrations add ${name} -p EMS.Db/ -s EMS.Api
 
 # Create a release build
@@ -31,6 +32,7 @@ watch:
 .PHONY: start-docker
 start-docker:
 	docker-compose up -d --build --force-recreate
+	make create-s3
 
 .PHONY: stop-docker
 stop-docker:
@@ -38,16 +40,16 @@ stop-docker:
 
 #####################################################
 
+# Start aws service locally using localstack
+.PHONY: localstack
+localstack:
+	docker-compose up -d --build --force-recreate localstack
+
 # Create s3 bucket and assign a policy
 .PHONY: create-s3
 create-s3:
 	aws --endpoint-url=http://localhost:4572 s3 mb s3://ems-data-bucket
 	aws --endpoint-url=http://localhost:4572 s3api put-bucket-acl --bucket ems-data-bucket --acl public-read 
-
-# Start s3 service locally
-.PHONY: start-s3
-start-s3:
-	docker-compose up -d --build --force-recreate localstack-s3 
 
 # List bucket contents
 .PHONY: list-s3

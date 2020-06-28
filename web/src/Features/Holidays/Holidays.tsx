@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import HolidaysList from './HolidaysList';
 import IHoliday from '../../services/Holiday/types/IHoliday';
 import { useSelector, useDispatch } from 'react-redux';
-import ActionMenu from '../Documents/ActionMenu';
+import ActionMenu from './ActionMenu';
 import { SelectHolidays } from './Reducer';
 import { HolidaysGetRequest } from './Action';
 

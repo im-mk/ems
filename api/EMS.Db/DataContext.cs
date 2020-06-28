@@ -22,6 +22,8 @@ namespace EMS.Db
             builder
             .Entity<YearHoliday>()
             .HasKey(c => c.Year);
+
+            builder.Entity<Holiday>().HasOne(h => h.RequestedBy).WithMany(a => a.Holidays).HasForeignKey(h => h.RequestedById);
         }
     }
 }

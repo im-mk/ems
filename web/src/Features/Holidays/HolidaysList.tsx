@@ -14,8 +14,7 @@ const HolidaysList: React.FC<IProps> = (props) => {
                     <th></th>
                     <th>Date</th>
                     <th>Date Requested</th>
-                    <th>Approved By</th>
-                    <th>Date Approved</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,10 +28,9 @@ function RenderRow(holiday: IHoliday, index: number) {
     return (
         <tr>
             <td>{index + 1}</td>
-            <td>{holiday.holidayOn}</td>
+            <td>{holiday.dateFrom + ' ' + holiday.dateFromPart + ' - ' + holiday.dateTo + ' ' + holiday.dateToPart}</td>
             <td>{holiday.dateRequested}</td>
-            <td>{holiday.approvedBy}</td>
-            <td>{holiday.dateApproved}</td>
+            <td>{holiday.status}</td>
         </tr>
     )
 }

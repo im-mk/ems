@@ -85,7 +85,7 @@ namespace EMS.Db.Migrations
 
             modelBuilder.Entity("EMS.Domain.Db.Document", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("DocumentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -101,36 +101,52 @@ namespace EMS.Db.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("DocumentId");
 
                     b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("EMS.Domain.Db.Holiday", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("HolidayId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ApprovedBy")
+                    b.Property<string>("Comments")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DateApproved")
+                    b.Property<DateTime>("DateFrom")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DatePart")
+                    b.Property<string>("DateFromPart")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateRequested")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("HolidayOn")
+                    b.Property<DateTime>("DateTo")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RequestedBy")
+                    b.Property<string>("DateToPart")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("RequestedById")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StatusById")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StatusDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("HolidayId");
+
+                    b.HasIndex("RequestedById");
+
+                    b.HasIndex("StatusById");
 
                     b.ToTable("Holidays");
                 });
@@ -289,6 +305,17 @@ namespace EMS.Db.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("EMS.Domain.Db.Holiday", b =>
+                {
+                    b.HasOne("EMS.Domain.Db.AppUser", "RequestedBy")
+                        .WithMany("Holidays")
+                        .HasForeignKey("RequestedById");
+
+                    b.HasOne("EMS.Domain.Db.AppUser", "StatusBy")
+                        .WithMany("HolidayStatuses")
+                        .HasForeignKey("StatusById");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

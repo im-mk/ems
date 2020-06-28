@@ -9,12 +9,12 @@ services:
     environment:
       - TokenKey=super sectet key
   
-  localstack-s3:
-    image: localstack/localstack:latest
-    container_name: aws-localstack
+  localstack:
+    image: localstack/localstack-light
+    container_name: localstack
     ports:
-      - '4563-4599:4563-4599'
-      - '8055:8080'
+      - '4566-4599:4566-4599'
+      - '8080:8080'
     environment:
       - SERVICES=s3
       - DEBUG=1

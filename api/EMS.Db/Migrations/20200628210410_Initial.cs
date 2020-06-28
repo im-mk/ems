@@ -51,7 +51,7 @@ namespace EMS.Db.Migrations
                 name: "Documents",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    DocumentId = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Path = table.Column<string>(nullable: true),
                     Comments = table.Column<string>(nullable: true),
@@ -59,25 +59,7 @@ namespace EMS.Db.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Documents", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Holidays",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RequestedBy = table.Column<string>(nullable: true),
-                    DateRequested = table.Column<DateTime>(nullable: false),
-                    HolidayOn = table.Column<DateTime>(nullable: false),
-                    DatePart = table.Column<string>(nullable: true),
-                    ApprovedBy = table.Column<string>(nullable: true),
-                    DateApproved = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Holidays", x => x.Id);
+                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +194,40 @@ namespace EMS.Db.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Holidays",
+                columns: table => new
+                {
+                    HolidayId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RequestedById = table.Column<string>(nullable: true),
+                    DateRequested = table.Column<DateTime>(nullable: false),
+                    DateFrom = table.Column<DateTime>(nullable: false),
+                    DateFromPart = table.Column<string>(nullable: true),
+                    DateTo = table.Column<DateTime>(nullable: false),
+                    DateToPart = table.Column<string>(nullable: true),
+                    Comments = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    StatusById = table.Column<string>(nullable: true),
+                    StatusDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Holidays", x => x.HolidayId);
+                    table.ForeignKey(
+                        name: "FK_Holidays_AspNetUsers_RequestedById",
+                        column: x => x.RequestedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Holidays_AspNetUsers_StatusById",
+                        column: x => x.StatusById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -248,6 +264,16 @@ namespace EMS.Db.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Holidays_RequestedById",
+                table: "Holidays",
+                column: "RequestedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Holidays_StatusById",
+                table: "Holidays",
+                column: "StatusById");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

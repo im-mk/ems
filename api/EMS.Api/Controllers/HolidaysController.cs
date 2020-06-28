@@ -12,7 +12,7 @@ namespace EMS.Api.Controllers
     public class HolidaysController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EMS.Domain.Db.Holiday>>> List([FromQuery]List.Query query)
+        public async Task<ActionResult<IEnumerable<EMS.Domain.View.Holiday>>> List([FromQuery]List.Query query)
         {
             return await Mediator.Send(query);
         }

@@ -50,7 +50,7 @@ namespace EMS.Core.Documents
 
                 var document = new Document
                 {
-                    Id = id,
+                    DocumentId = id,
                     Title = request.Title,
                     Comments = request.Comment,
                     Path = path,

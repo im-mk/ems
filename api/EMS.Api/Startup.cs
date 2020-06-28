@@ -20,15 +20,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Amazon.S3;
 using EMS.Core.AWS;
+using System;
+using Amazon.Extensions.NETCore.Setup;
 
 namespace EMS.Api
 {
     public class Startup
     {
-        private const string _corsPolicy = "CorsPolicy";
+        private const string _corsPolicy = "CorsPolicy";        
 
         public Startup(IConfiguration configuration)
-        {
+        {            
             Configuration = configuration;
         }
 
@@ -52,9 +54,9 @@ namespace EMS.Api
                     .WithOrigins("http://localhost:3000");
                 });
             });
-            
+
             services.AddMediatR(typeof(List.Handler).Assembly);
-            
+
             services
                 .AddControllers(opt =>
                 {
@@ -63,7 +65,7 @@ namespace EMS.Api
                     .Build();
                     opt.Filters.Add(new AuthorizeFilter(policy));
                 })
-                .AddFluentValidation(config => 
+                .AddFluentValidation(config =>
                 {
                     config.RegisterValidatorsFromAssemblyContaining<Create>();
                 });
@@ -72,11 +74,12 @@ namespace EMS.Api
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
             identityBuilder.AddEntityFrameworkStores<DataContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
-            
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(opt => {
+            .AddJwtBearer(opt =>
+            {
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -89,11 +92,19 @@ namespace EMS.Api
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
 
-            // Inject S3Client with appsettings config
-            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
-            services.AddAWSService<IAmazonS3>();
-            
-            services.AddScoped<IS3Service, S3Service>();
+            // if (_appEnv.IsDevelopment())
+            // {
+            //     var awsS3Options = new AWSOptions();
+            //     awsS3Options.DefaultClientConfig.ServiceURL = "http://localhost:4572";
+            //     services.AddAWSService<IAmazonS3>(awsS3Options);
+            // }
+            // else
+            // {
+                // Inject S3Client with appsettings config
+                services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+                services.AddAWSService<IAmazonS3>();
+                services.AddScoped<IS3Service, S3Service>();
+            // }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
