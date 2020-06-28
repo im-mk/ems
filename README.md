@@ -1,6 +1,12 @@
-# Employee Management System
+# Employee Management System (WIP)
 
 Manage employee records, including holidays, documents, absense etc through this system.
+
+
+
+This project is a work in progress and still in its early development phase.
+
+
 
 ## Getting started
 
