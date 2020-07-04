@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using EMS.Api.Middleware;
 using EMS.Core.Interfaces;
-using EMS.Infrastructure.Security;
+using EMS.Library.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -41,7 +41,7 @@ namespace EMS.Api
         {
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(Configuration.GetConnectionString("EMS"));
+                opt.UseNpgsql(Configuration.GetConnectionString("EMS"));
             });
 
             services.AddCors(options =>

@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Db", "EMS.Db\EMS.Db.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Core", "EMS.Core\EMS.Core.csproj", "{F36347B6-C5E1-4A55-9112-036B920D2186}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Infrastructure", "EMS.Infrastructure\EMS.Infrastructure.csproj", "{6DA7134D-EB30-4DC8-AEFD-652E4BD896C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Library", "EMS.Library\EMS.Library.csproj", "{6DA7134D-EB30-4DC8-AEFD-652E4BD896C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

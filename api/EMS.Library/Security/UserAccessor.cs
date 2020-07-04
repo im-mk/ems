@@ -3,7 +3,7 @@ using System.Security.Claims;
 using EMS.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 
-namespace EMS.Infrastructure.Security
+namespace EMS.Library.Security
 {
     public class UserAccessor : IUserAccessor
     {

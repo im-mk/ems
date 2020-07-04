@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\EMS.Db\EMS.Db.csproj"/>
-    <ProjectReference Include="..\EMS.Domain\EMS.Domain.csproj"/>
+    <ProjectReference Include="..\EMS.Db\EMS.Db.csproj" />
+    <ProjectReference Include="..\EMS.Domain\EMS.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0"/>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2"/>
-    <PackageReference Include="AWSSDK.S3" Version="3.3.110.67"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.111.21" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>

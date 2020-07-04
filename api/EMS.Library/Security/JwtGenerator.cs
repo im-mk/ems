@@ -8,7 +8,7 @@ using EMS.Domain.Db;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace EMS.Infrastructure.Security
+namespace EMS.Library.Security
 {
     public class JwtGenerator : IJwtGenerator
     {

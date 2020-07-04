@@ -1,6 +1,28 @@
-version: "3.5"
-
+version: '3.7'
 services:
+  
+  # api:
+  #   build: ./
+  #   image: ems-api
+  #   ports:
+  #     - "5000:80"
+  #   environment:
+  #     - TokenKey=super sectet key
+  
+  localstack:
+    image: localstack/localstack-light
+    container_name: localstack
+    ports:
+      - '4566-4599:4566-4599'
+      - '8080:8080'
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - './.localstack:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+
   portainer:
     image: portainer/portainer
     ports:
@@ -11,7 +33,7 @@ services:
     networks:
       - network1
     restart: unless-stopped
-
+    
   postgres:
     image: postgres:alpine
     volumes:
@@ -25,7 +47,7 @@ services:
     networks:
       - network1
     restart: unless-stopped
-
+  
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -38,7 +60,7 @@ services:
     networks:
       - network1
     restart: unless-stopped
-
+  
 networks:
   network1:
     name: mynetwork
