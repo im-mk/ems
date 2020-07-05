@@ -20,8 +20,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Amazon.S3;
 using EMS.Core.AWS;
-using System;
-using Amazon.Extensions.NETCore.Setup;
+using AutoMapper;
+using EMS.Core.Mappers;
 
 namespace EMS.Api
 {
@@ -56,6 +56,7 @@ namespace EMS.Api
             });
 
             services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddAutoMapper(typeof(List.Handler).Assembly);
 
             services
                 .AddControllers(opt =>
@@ -90,7 +91,7 @@ namespace EMS.Api
             });
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
-            services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IUserAccessor, UserAccessor>();            
 
             // if (_appEnv.IsDevelopment())
             // {
@@ -105,6 +106,10 @@ namespace EMS.Api
                 services.AddAWSService<IAmazonS3>();
                 services.AddScoped<IS3Service, S3Service>();
             // }
+
+            //Mappers
+            services.AddScoped<IUserBasicMapper, UserBasicMapper>();
+            services.AddScoped<IHolidayMapper, HolidayMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

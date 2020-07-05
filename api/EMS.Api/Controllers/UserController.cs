@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using EMS.Core.User;
-using EMS.Domain.View;
+using EMS.Core.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

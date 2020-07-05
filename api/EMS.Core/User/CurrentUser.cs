@@ -2,9 +2,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using EMS.Core.Interfaces;
 using EMS.Domain.Db;
-using EMS.Domain.View;
+using EMS.Core.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using EMS.Core.Mappers;
 
 namespace EMS.Core.User
 {
@@ -16,15 +17,18 @@ namespace EMS.Core.User
             private readonly UserManager<AppUser> _userManager;
             private readonly IJwtGenerator _jwtGenerator;
             private readonly IUserAccessor _userAccessor;
+            private readonly IUserBasicMapper _mapper;
 
             public Handler(
                 UserManager<AppUser> userManager,
                 IJwtGenerator jwtGenerator,
-                IUserAccessor userAccessor)
+                IUserAccessor userAccessor,
+                IUserBasicMapper mapper)
             {
                 _jwtGenerator = jwtGenerator;
                 _userAccessor = userAccessor;
                 _userManager = userManager;
+                _mapper = mapper;
             }
 
             public async Task<UserBasic> Handle(
@@ -33,13 +37,7 @@ namespace EMS.Core.User
             {
                 var user = await _userManager.FindByNameAsync(_userAccessor.GetCurrentUsername());
 
-                return new UserBasic
-                {
-                    DisplayName = user.DisplayName,
-                    Username = user.UserName,
-                    Token = _jwtGenerator.CreateToken(user),
-                    Image = null
-                };
+                return _mapper.Map(user, _jwtGenerator.CreateToken(user));
             }
         }
     }

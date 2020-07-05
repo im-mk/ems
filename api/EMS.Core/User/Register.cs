@@ -8,11 +8,12 @@ using EMS.Core.Interfaces;
 using EMS.Core.Validators;
 using EMS.Db;
 using EMS.Domain.Db;
-using EMS.Domain.View;
+using EMS.Core.Dto;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using EMS.Core.Mappers;
 
 namespace EMS.Core.User
 {
@@ -42,15 +43,18 @@ namespace EMS.Core.User
             private readonly DataContext _context;
             private readonly IJwtGenerator _jwtGenerator;
             private readonly UserManager<AppUser> _userManager;
+            private readonly IUserBasicMapper _mapper;
 
             public Handler(
                 DataContext context,
                 UserManager<AppUser> userManager,
-                IJwtGenerator jwtGenerator)
+                IJwtGenerator jwtGenerator,
+                IUserBasicMapper mapper)
             {
                 _userManager = userManager;
                 _context = context;
                 _jwtGenerator = jwtGenerator;
+                _mapper = mapper;
             }
 
             public async Task<UserBasic> Handle(Command request, CancellationToken cancellationToken)
@@ -72,13 +76,7 @@ namespace EMS.Core.User
 
                 if (result.Succeeded)
                 {
-                    return new UserBasic
-                    {
-                        DisplayName = user.DisplayName,
-                        Token = _jwtGenerator.CreateToken(user),
-                        Username = user.UserName,
-                        Image = null
-                    };
+                    return _mapper.Map(user, _jwtGenerator.CreateToken(user));
                 }
 
                 throw new Exception("Problem creating user");

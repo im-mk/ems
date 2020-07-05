@@ -1,4 +1,4 @@
-namespace EMS.Domain.View
+namespace EMS.Core.Dto
 {
     public class UserBasic
     {

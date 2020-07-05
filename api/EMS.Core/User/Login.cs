@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using EMS.Core.Errors;
 using System.Net;
 using FluentValidation;
-using EMS.Domain.View;
+using EMS.Core.Dto;
 using EMS.Domain.Db;
 using EMS.Core.Interfaces;
+using EMS.Core.Mappers;
 
 namespace EMS.Core.User
 {
@@ -33,15 +34,18 @@ namespace EMS.Core.User
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
             private readonly IJwtGenerator _jwtGenerator;
+            private readonly IUserBasicMapper _mapper;
 
             public Handler(
                 UserManager<AppUser> userManager, 
                 SignInManager<AppUser> signInManager,
-                IJwtGenerator jwtGenerator)
+                IJwtGenerator jwtGenerator,
+                IUserBasicMapper mapper)
             {
                 _signInManager = signInManager;
                 _jwtGenerator = jwtGenerator;
                 _userManager = userManager;
+                _mapper = mapper;
             }
 
             public async Task<UserBasic> Handle(Query request, CancellationToken cancellationToken)
@@ -54,15 +58,8 @@ namespace EMS.Core.User
                 var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 
                 if (result.Succeeded)
-                {
-                    //todo: generate token
-                    return new UserBasic
-                    {
-                        DisplayName = user.DisplayName,
-                        Token = _jwtGenerator.CreateToken(user),
-                        Username = user.UserName,
-                        Image = null
-                    };
+                {                    
+                    return _mapper.Map(user, _jwtGenerator.CreateToken(user));
                 }
 
                 throw new RestException(HttpStatusCode.Unauthorized);

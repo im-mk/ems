@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MediatR;
 using EMS.Core.Holidays;
-using Microsoft.AspNetCore.Authorization;
+using EMS.Core.Dto;
 
 namespace EMS.Api.Controllers
 {
     public class HolidaysController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EMS.Domain.View.Holiday>>> List([FromQuery]List.Query query)
+        public async Task<ActionResult<IEnumerable<Holiday>>> List([FromQuery]List.Query query)
         {
             return await Mediator.Send(query);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<EMS.Domain.Db.Holiday>> Details(int id)
+        public async Task<ActionResult<Holiday>> Details(int id)
         {
             return await Mediator.Send(new Details.Query{ Id = id });
         }
